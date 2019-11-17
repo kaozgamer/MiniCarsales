@@ -1,18 +1,28 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'my-auth-token'
+  })
+};
 
 @Component({
   selector: 'app-add-vehicle',
   templateUrl: './add-vehicle.component.html',
   styleUrls: ['./add-vehicle.component.css']
 })
+
 export class AddVehicleComponent implements OnInit {
   private baseUrl: string;
   private http: HttpClient;
   private route: ActivatedRoute;
   private type: string;
+  private errors: string[];
+  private successfulSave: boolean;
   vehicleForm: FormGroup;
 
   constructor(route: ActivatedRoute, http: HttpClient, @Inject('BASE_URL') baseUrl: string, private fb: FormBuilder) {
@@ -40,16 +50,19 @@ export class AddVehicleComponent implements OnInit {
 
   onClickSubmit() {
     if (this.vehicleForm.valid) {
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
+      let headers = new HttpHeaders();
+      headers.append('Accept', 'application/json');
       let person = {
-        title: this.vehicleForm.value.title,
-        firstName: this.vehicleForm.value.firstName,
-        surname: this.vehicleForm.value.surname,
-        emailAddress: this.vehicleForm.value.emailAddress
+        type: 'Car',
+        make: this.vehicleForm.value.make,
+        model: this.vehicleForm.value.model,
+        engine: this.vehicleForm.value.engine,
+        bodyType: this.vehicleForm.value.bodyType,
+        numberOfWheels: this.vehicleForm.value.numberOfWheels,
+        numberOfDoors: this.vehicleForm.value.numberOfDoors
       };
       this.errors = [];
-      this.http.post('/api/person', JSON.stringify(person), options)
+      this.http.post('/api/person', JSON.stringify(person), httpOptions)
         .map(res => res.json())
         .subscribe(
           (data) => this.successfulSave = true,
