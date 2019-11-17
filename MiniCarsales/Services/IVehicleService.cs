@@ -14,13 +14,14 @@ namespace MiniCarsales.Services
         /// <summary>
         /// Deletes the vehicle with the given id from memory.
         /// </summary>
-        /// <param name="vehicle">The id of the vehicle to delete.</param>
+        /// <param name="id">The id of the vehicle to delete.</param>
         void Delete(long id);
 
         /// <summary>
-        /// Gets all vehicles saved in memory.
+        /// Gets all vehicles saved in memory for the given vehicle type.
         /// </summary>
-        /// <returns>All vehicles saved in memory.</returns>
-        List<Vehicle> GetAll();
+        /// <param name="type">The type of vehicle to retrieve.</param>
+        /// <returns>All vehicles saved in memory that are of the required type.</returns>
+        IList<Vehicle> GetAll(VehicleType type);
     }
 }

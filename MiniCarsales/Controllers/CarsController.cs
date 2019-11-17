@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MiniCarsales.Models;
@@ -8,17 +9,17 @@ namespace MiniCarsales.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VehicleController : ControllerBase
+    public class CarsController : ControllerBase
     {
         readonly IVehicleService _vehicleService;
-        readonly ILogger<VehicleController> _logger;
+        readonly ILogger<CarsController> _logger;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="vehicleService">The vehicle service.</param>
         /// <param name="logger">The logger for this controller.</param>
-        public VehicleController(IVehicleService vehicleService, ILogger<VehicleController> logger)
+        public CarsController(IVehicleService vehicleService, ILogger<CarsController> logger)
         {
             _vehicleService = vehicleService;
             _logger = logger;
@@ -29,25 +30,36 @@ namespace MiniCarsales.Controllers
         /// </summary>
         /// <returns>All people stored in memory.</returns>
         [HttpGet]
-        public IEnumerable<Vehicle> Get()
+        public IEnumerable<Car> Get()
         {
-            var vehicles = _vehicleService.GetAll();
-            _logger.LogInformation($"Retrieving all vehicles (count: {vehicles.Count})");
-            return _vehicleService.GetAll();
+            var cars = _vehicleService.GetAll(VehicleType.Car);
+
+            _logger.LogInformation($"Retrieving all cars (count: {cars.Count})");
+
+            return cars.Select(vehicle => vehicle as Car);
         }
 
         [HttpPost]
-        public void Post([FromBody] Vehicle vehicle)
+        public IActionResult Post([FromBody] Car vehicle)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _logger.LogInformation($"Saving vehicle {vehicle}");
             _vehicleService.SaveOrUpdate(vehicle);
+
+            return Ok(vehicle);
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-            _logger.LogInformation($"Deleting vehicle wiht id {id}");
+            _logger.LogInformation($"Deleting vehicle with id {id}");
             _vehicleService.Delete(id);
+
+            return Ok();
         }
     }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-car',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-car.component.css']
 })
 export class AddCarComponent implements OnInit {
+  @Input() vehicleForm: NgForm;
 
   constructor() { }
 

@@ -54,9 +54,9 @@ namespace MiniCarsales.Services
         /// Gets all vehicles saved in memory.
         /// </summary>
         /// <returns>All vehicles saved in memory.</returns>
-        public List<Vehicle> GetAll()
+        public IList<Vehicle> GetAll(VehicleType type)
         {
-            return _vehicles;
+            return _vehicles.Where(v => v.Type == type).ToList();
         }
 
         /// <summary>

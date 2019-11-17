@@ -16,7 +16,7 @@ namespace MiniCarsales.Modules
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
-            var controllersAssembly = Assembly.GetAssembly(typeof(VehicleController));
+            var controllersAssembly = Assembly.GetAssembly(typeof(CarsController));
 
             builder.RegisterApiControllers(controllersAssembly);
         }
