@@ -1,0 +1,16 @@
+<form class="needs-validation text-center border border-light p-5" #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
+  <p id="header" class="h4 mb-4">Add {{type}}</p>
+  <div class="form-group">
+    <input class="form-control mb-4" type="text" name="firstname" placeholder="First Name" ngModel>
+  </div>
+  <div class="form-group">
+    <input class="form-control mb-4" type="text" name="lastname" placeholder="Last Name" ngModel>
+  </div>
+  <div class="form-group">
+    <input class="form-control mb-4" type="number" name="age" placeholder="Age" ngModel>
+  </div>
+  <div class="form-group">
+    <app-add-car *ngIf="type=='teacher'"></app-add-car>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
