@@ -34,11 +34,12 @@ This solution currently supports adding a car and viewing all cars currently sav
 
 Here is a summary of the design decisions I took:
 * `Vehicle` is a base class that `Car` inherits from - any new vehicles in the future can inherit from `Vehicle`.
-  * Both these classes contain attributes on the property that specifies the validation - this is used and checked by the controller.
+  * Both these classes contain validations attributes on the properties that is validated by the controller (in addition to the client side validation).
 * `IVehicleService` is the service that the controller calls to perform CRUD operations on the vehicles stored in memory.
   * As per the requirements, all vehicles are simply stored in a list in memory - I choose this as it's the easiest and I have designed the service in a way that it can be easily pointed at a database, if one existed.
   * This service has been added as a singleton so that it retains the list of vehicles between client calls - again this was done because vehicles are not persisted to a database.
 * On the client side I have a `add-car` component that extends `add-vehicle` - `add-vehicle` contains the input fields that are common to all vehicles while `add-car` contains the car specific fields. This is done so that it can be extends to accommodate more vehicle types in the future.
+  * These inputs contain client side validation using Angular.
 * xUnit is used to unit test the backend service and cars controller - see `CarsControllerFacts` and `VehicleServiceFacts`.
 
 
