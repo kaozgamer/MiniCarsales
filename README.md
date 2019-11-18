@@ -28,7 +28,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Main Page and Dropdown Menu][main-page-and-dropdown-menu]](https://i.imgur.com/eYVkR0y.png)
 
 This solution currently supports adding a car and viewing all cars currently saved in memory.
 
