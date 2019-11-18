@@ -26,9 +26,9 @@ namespace MiniCarsales.Controllers
         }
 
         /// <summary>
-        /// Gets all the people stored in memory.
+        /// Gets all cars stored in memory.
         /// </summary>
-        /// <returns>All people stored in memory.</returns>
+        /// <returns>All cars stored in memory.</returns>
         [HttpGet]
         public IEnumerable<Car> Get()
         {
@@ -39,20 +39,30 @@ namespace MiniCarsales.Controllers
             return cars.Select(vehicle => vehicle as Car);
         }
 
+        /// <summary>
+        /// Saves the given car to the vehicles list in memory.
+        /// </summary>
+        /// <param name="car">The car to be saved, sent by the client.</param>
+        /// <returns>BadRequest if the car sent by the client is not valid, otherwise Ok.</returns>
         [HttpPost]
-        public IActionResult Post([FromBody] Car vehicle)
+        public IActionResult Post([FromBody] Car car)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _logger.LogInformation($"Saving vehicle {vehicle}");
-            _vehicleService.SaveOrUpdate(vehicle);
+            _logger.LogInformation($"Saving vehicle {car}");
+            _vehicleService.SaveOrUpdate(car);
 
-            return Ok(vehicle);
+            return Ok(car);
         }
 
+        /// <summary>
+        /// Deletes the car with the given id from memory.
+        /// </summary>
+        /// <param name="id">The id of the car to delete.</param>
+        /// <returns>HTTP 200 code.</returns>
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
