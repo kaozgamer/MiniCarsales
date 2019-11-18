@@ -85,7 +85,7 @@ git clone https://github.com/github_username/repo.git
 ```
 2. Open MiniCarsales.sln in Visual Studio
 3. Build solution - Visual Studio will handle installing all the required dependencies
-
+4. Run in IIS Express
 
 
 <!-- CONTACT -->
