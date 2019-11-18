@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace MiniCarsales.Models
 {
@@ -13,7 +15,8 @@ namespace MiniCarsales.Models
         /// Type of vehicle.
         /// </summary>
         [Required]
-        public VehicleType Type { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public VehicleType VehicleType { get; set; }
 
         /// <summary>
         /// The make of this vehicle.

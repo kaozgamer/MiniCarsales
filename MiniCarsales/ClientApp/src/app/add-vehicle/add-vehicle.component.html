@@ -1,7 +1,8 @@
-<form [formGroup]="vehicleForm" class="text-center border border-light p-5" (ngSubmit)="onClickSubmit()">
-  <p id="header" class="h4 mb-4">Add {{type}}</p>
+<form [formGroup]="vehicleForm" class="border border-light p-5" (ngSubmit)="onClickSubmit()">
+  <p id="header" class="text-center text-capitalize h4 mb-4">Add {{type}}</p>
   <div class="form-group">
-    <input class="form-control mb-4" type="text" id="name" name="make" placeholder="Make" formControlName="make">
+    <label for="make">Make</label>
+    <input class="form-control mb-4" type="text" id="make" name="make" formControlName="make">
     <div *ngIf="(vehicleForm.controls['make'].dirty || vehicleForm.controls['make'].touched) && vehicleForm.controls['make'].invalid"
          class="alert alert-danger">
       <div *ngIf="vehicleForm.controls['make'].errors.required">
@@ -13,7 +14,8 @@
     </div>
   </div>
   <div class="form-group">
-    <input class="form-control mb-4" type="text" name="model" placeholder="Model" formControlName="model">
+    <label for="model">Model</label>
+    <input class="form-control mb-4" type="text" id="model" name="model" formControlName="model">
     <div *ngIf="(vehicleForm.controls['model'].dirty || vehicleForm.controls['model'].touched) && vehicleForm.controls['model'].invalid"
          class="alert alert-danger">
       <div *ngIf="vehicleForm.controls['model'].errors.required">
@@ -25,7 +27,8 @@
     </div>
   </div>
   <div class="form-group">
-    <input class="form-control mb-4" type="text" name="engine" placeholder="Engine" formControlName="engine">
+    <label for="engine">Engine</label>
+    <input class="form-control mb-4" type="text" id="engine" name="engine" formControlName="engine">
     <div *ngIf="(vehicleForm.controls['engine'].dirty || vehicleForm.controls['engine'].touched) && vehicleForm.controls['engine'].invalid"
          class="alert alert-danger">
       <div *ngIf="vehicleForm.controls['engine'].errors.required">

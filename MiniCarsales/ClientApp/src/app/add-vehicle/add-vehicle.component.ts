@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -25,7 +25,7 @@ export class AddVehicleComponent implements OnInit {
   private successfulSave: boolean;
   vehicleForm: FormGroup;
 
-  constructor(route: ActivatedRoute, http: HttpClient, @Inject('BASE_URL') baseUrl: string, private fb: FormBuilder) {
+    constructor(private readonly router: Router, route: ActivatedRoute, http: HttpClient, @Inject('BASE_URL') baseUrl: string, private fb: FormBuilder) {
     this.route = route;
     this.http = http;
     this.baseUrl = baseUrl;
@@ -42,7 +42,7 @@ export class AddVehicleComponent implements OnInit {
       engine: ['', [Validators.required, Validators.maxLength(40)]],
       numberOfDoors: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
       numberOfWheels: ['', [Validators.required, Validators.min(3), Validators.max(10)]],
-      bodyType: ['Sedan', Validators.required]
+      carBodyType: ['Sedan', Validators.required]
     });
 
     this.vehicleForm.valueChanges.subscribe(newVal => console.log(newVal));
@@ -52,34 +52,20 @@ export class AddVehicleComponent implements OnInit {
     if (this.vehicleForm.valid) {
       let headers = new HttpHeaders();
       headers.append('Accept', 'application/json');
-      let person = {
-        type: 'Car',
+      let car = {
+        vehicleType: 'Car',
         make: this.vehicleForm.value.make,
         model: this.vehicleForm.value.model,
         engine: this.vehicleForm.value.engine,
-        bodyType: this.vehicleForm.value.bodyType,
+        carBodyType: this.vehicleForm.value.carBodyType,
         numberOfWheels: this.vehicleForm.value.numberOfWheels,
         numberOfDoors: this.vehicleForm.value.numberOfDoors
       };
       this.errors = [];
-      this.http.post('/api/person', JSON.stringify(person), httpOptions)
-        .map(res => res.json())
+      this.http.post('/api/cars', JSON.stringify(car), httpOptions)
         .subscribe(
-          (data) => this.successfulSave = true,
-          (err) => {
-            this.successfulSave = false;
-            if (err.status === 400) {
-              // handle validation error
-              let validationErrorDictionary = JSON.parse(err.text());
-              for (var fieldName in validationErrorDictionary) {
-                if (validationErrorDictionary.hasOwnProperty(fieldName)) {
-                  this.errors.push(validationErrorDictionary[fieldName]);
-                }
-              }
-            } else {
-              this.errors.push("something went wrong!");
-            }
-          });
+            () => this.router.navigateByUrl('/view-vehicles'),
+          () => this.successfulSave = false);
     }
   }
 }

@@ -1,12 +1,13 @@
 <div class="form-group" [formGroup]="vehicleForm">
-  <label for="bodyTypeFormSelect">Body Type</label>
-  <select class="form-control" id="bodyTypeFormSelect" name="bodyType" [formControlName]="'bodyType'">
+  <label for="carBodyTypeFormSelect">Body Type</label>
+  <select class="form-control" id="carBodyTypeFormSelect" name="carBodyType" [formControlName]="'carBodyType'">
     <option value="Sedan">Sedan</option>
     <option value="Hatchback">Hatchback</option>
   </select>
 </div>
 <div class="form-group" [formGroup]="vehicleForm">
-  <input class="form-control" type="number" name="numberOfDoors" [formControlName]="'numberOfDoors'" placeholder="Number of Doors">
+  <label for="numberOfDoors">Number of Doors</label>
+  <input id="numberOfDoors" class="form-control" type="number" name="numberOfDoors" [formControlName]="'numberOfDoors'">
   <div *ngIf="(vehicleForm.controls['numberOfDoors'].dirty || vehicleForm.controls['numberOfDoors'].touched) && vehicleForm.controls['numberOfDoors'].invalid"
        class="alert alert-danger">
     <div *ngIf="vehicleForm.controls['numberOfDoors'].errors.required">
@@ -21,7 +22,8 @@
   </div>
 </div>
 <div class="form-group" [formGroup]="vehicleForm">
-  <input class="form-control" type="number" name="numberOfWheels" [formControlName]="'numberOfWheels'" placeholder="Number of Wheels">
+  <label for="numberOfWheels">Number of Wheels</label>
+  <input id="numberOfWheels" class="form-control" type="number" name="numberOfWheels" [formControlName]="'numberOfWheels'">
   <div *ngIf="(vehicleForm.controls['numberOfWheels'].dirty || vehicleForm.controls['numberOfWheels'].touched) && vehicleForm.controls['numberOfWheels'].invalid"
        class="alert alert-danger">
     <div *ngIf="vehicleForm.controls['numberOfWheels'].errors.required">
