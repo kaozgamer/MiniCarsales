@@ -28,7 +28,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Main Page and Dropdown Menu][main-page-and-dropdown-menu]](https://i.imgur.com/eYVkR0y.png)
+![Main Page and Dropdown Menu](https://i.imgur.com/eYVkR0y.png)
+![Add Vehicle](https://i.imgur.com/x1QHE8V.png)
+![Home Page - View Vehicles](https://i.imgur.com/40j5L3Z.png)
 
 This solution currently supports adding a car and viewing all cars currently saved in memory.
 
