@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,8 +12,7 @@ const httpOptions = {
 
 @Component({
   selector: 'app-add-vehicle',
-  templateUrl: './add-vehicle.component.html',
-  styleUrls: ['./add-vehicle.component.css']
+  templateUrl: './add-vehicle.component.html'
 })
 export class AddVehicleComponent implements OnInit {
   private readonly http: HttpClient;

@@ -17,7 +17,7 @@ namespace MiniCarsales.Services
         }
 
         /// <summary>
-        /// Constructor.
+        /// Constructor. Mainly used for unit testing.
         /// </summary>
         /// <param name="vehicle">The list of vehicles to initialise this service with.</param>
         public VehicleService(List<Vehicle> vehicle)
@@ -44,7 +44,7 @@ namespace MiniCarsales.Services
         /// <summary>
         /// Deletes the vehicle with the given id from memory.
         /// </summary>
-        /// <param name="vehicle">The id of the vehicle to delete.</param>
+        /// <param name="id">The id of the vehicle to delete.</param>
         public void Delete(long id)
         {
             _vehicles.RemoveAll(vehicle => vehicle.Id == id);
