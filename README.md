@@ -60,6 +60,10 @@ This is an example of how to list things you need to use the software and how to
 ```sh
 npm install npm@latest -g
 ```
+* ng
+```sh
+npm install -g @angular/cli
+```
 
 ### Installation
  
@@ -67,10 +71,8 @@ npm install npm@latest -g
 ```sh
 git clone https://github.com/github_username/repo.git
 ```
-2. Install NPM packages
-```sh
-npm install
-```
+2. Open MiniCarsales.sln in Visual Studio
+3. Build solution - Visual Studio will handle installing all the required dependencies
 
 
 
