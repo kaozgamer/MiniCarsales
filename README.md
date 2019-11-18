@@ -8,11 +8,6 @@
 
   <p align="center">
     Vehicle management system that will initially only cater for cars.
-    <br />
-    <a href="https://github.com/github_username/repo"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/github_username/repo">View Demo</a>
   </p>
 </p>
 
@@ -33,18 +28,35 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![Main Page and Dropdown Menu](https://i.imgur.com/eYVkR0y.png)
+*Main Page and Dropdown Menu*
 
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`github_username`, `repo`, `twitter_handle`, `email`
+
+![Add Vehicle](https://i.imgur.com/x1QHE8V.png)
+*Add Vehicle*
+
+
+![Home Page - View Vehicles](https://i.imgur.com/40j5L3Z.png)
+*Home Page - View all Vehicles*
+
+This solution currently supports adding a car and viewing all cars currently saved in memory.
+
+Here is a summary of the design decisions I took:
+* `Vehicle` is a base class that `Car` inherits from - any new vehicles in the future can inherit from `Vehicle`.
+  * Both these classes contain validations attributes on the properties that is validated by the controller (in addition to the client side validation).
+* `IVehicleService` is the service that the controller calls to perform CRUD operations on the vehicles stored in memory.
+  * As per the requirements, all vehicles are simply stored in a list in memory - I choose this as it's the easiest and I have designed the service in a way that it can be easily pointed at a database, if one existed.
+  * This service has been added as a singleton (in `Startup.ConfigureServices()`), so that it retains the list of vehicles between client calls - again this was done because vehicles are not persisted to a database.
+* On the client side I have a `add-car` component that extends `add-vehicle` - `add-vehicle` contains the input fields that are common to all vehicles while `add-car` contains the car specific fields. This is done so that it can be extends to accommodate more vehicle types in the future.
+  * These inputs contain client side validation using Angular.
+* xUnit is used to unit test the backend service and cars controller - see `CarsControllerFacts` and `VehicleServiceFacts`.
 
 
 ### Built With
 
-* []()
-* []()
-* []()
+* Angular
+* .NET Core
+* Bootstrap
 
 
 
@@ -73,15 +85,15 @@ git clone https://github.com/github_username/repo.git
 ```
 2. Open MiniCarsales.sln in Visual Studio
 3. Build solution - Visual Studio will handle installing all the required dependencies
-
+4. Run in IIS Express
 
 
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
+Thushan Perera - thushan.perera95@gmail.com
 
-Project Link: [https://github.com/github_username/repo](https://github.com/github_username/repo)
+Project Link: [https://github.com/kaozgamer/MiniCarsales](https://github.com/kaozgamer/MiniCarsales)
 
 
 
@@ -99,5 +111,5 @@ Project Link: [https://github.com/github_username/repo](https://github.com/githu
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
+[linkedin-url]: https://www.linkedin.com/in/thushanperera
 [product-screenshot]: images/screenshot.png
