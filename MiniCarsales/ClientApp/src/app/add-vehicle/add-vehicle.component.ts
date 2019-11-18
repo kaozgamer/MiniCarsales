@@ -15,23 +15,22 @@ const httpOptions = {
   templateUrl: './add-vehicle.component.html',
   styleUrls: ['./add-vehicle.component.css']
 })
-
 export class AddVehicleComponent implements OnInit {
-  private baseUrl: string;
-  private http: HttpClient;
-  private route: ActivatedRoute;
-  private type: string;
-  private errors: string[];
-  private successfulSave: boolean;
+  private readonly http: HttpClient;
+    private type: string;
+    private route: ActivatedRoute
   vehicleForm: FormGroup;
 
-    constructor(private readonly router: Router, route: ActivatedRoute, http: HttpClient, @Inject('BASE_URL') baseUrl: string, private fb: FormBuilder) {
+  constructor(private readonly router: Router,
+    route: ActivatedRoute,
+    http: HttpClient,
+      private fb: FormBuilder) {
     this.route = route;
     this.http = http;
-    this.baseUrl = baseUrl;
   }
 
   ngOnInit() {
+
     this.route.params.subscribe(params => {
       this.type = params['type'];
     });
@@ -50,8 +49,10 @@ export class AddVehicleComponent implements OnInit {
 
   onClickSubmit() {
     if (this.vehicleForm.valid) {
+
       let headers = new HttpHeaders();
       headers.append('Accept', 'application/json');
+
       let car = {
         vehicleType: 'Car',
         make: this.vehicleForm.value.make,
@@ -61,11 +62,9 @@ export class AddVehicleComponent implements OnInit {
         numberOfWheels: this.vehicleForm.value.numberOfWheels,
         numberOfDoors: this.vehicleForm.value.numberOfDoors
       };
-      this.errors = [];
+
       this.http.post('/api/cars', JSON.stringify(car), httpOptions)
-        .subscribe(
-            () => this.router.navigateByUrl('/view-vehicles'),
-          () => this.successfulSave = false);
+        .subscribe(() => this.router.navigateByUrl(''));
     }
   }
 }
